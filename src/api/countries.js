@@ -2,10 +2,11 @@ import axios from "axios";
 
 const baseUrl = "https://restcountries.com/v3.1/all";
 
-export const getAllCountries = async () => {
+export const getAllCountries =  async() => {
   try {
     const countries = await axios.get(baseUrl);
     return countries;
+    
   } catch (error) {
     console.log(error);
   }

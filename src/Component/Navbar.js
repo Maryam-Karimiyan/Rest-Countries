@@ -13,9 +13,9 @@ const Navbar = () => {
   return (
     <nav>
       <h1>Where in the world?</h1>
-      <button onClick={handlelightdark}>
-        <img src="../images/moon.png" id="icon" alt=""/>
-        <span>Light Mode</span>
+      <button id="icon" onClick={handlelightdark}>
+        <img src="../images/moon.png" alt="" />
+        <span>Light/Dark</span>
       </button>
     </nav>
   );
