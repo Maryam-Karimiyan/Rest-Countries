@@ -1,36 +1,30 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-const CountriesList = ({ countriesData }) => {
-     console.log(countriesData);
-    return ( 
-        <div>
-            <div className="search">
+import { useEffect, useState } from "react";
+import Cards from "./Cards";
+const CountriesList = () => {
+  const [countries, setCountries] = useState();
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(`https://restcountries.com/v3.1/all`);
+        const data = await response.json();
+        await setCountries(data);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+  return (
+    <div className="cardsContainer">
+      {countries &&
+        countries.map((c) => {
+          return (
+             <Cards country={c}/>
+           
+          );
+        })}
+    </div>
+  );
+};
 
-            </div>
-            <div>
-                {countriesData?.map(c=>{
-                    return(
-                    <Card style={{ width: "18rem" }}>
-                      <Card.Img variant="top" src={c.flags.png} />
-                      <Card.Body>
-                        <Card.Title>{c.name.common}</Card.Title>
-                        <p>
-                          Population: <span>{c.population}</span>
-                        </p>
-                        <p>
-                          Region: <span>{c.region}</span>
-                        </p>
-                        <p>
-                          Capital: <span>{c.capital[0]}</span>
-                        </p>
-                      </Card.Body>
-                    </Card>
-                    );
-                  
-              })}
-            </div>
-        </div>
-     );
-}
- 
 export default CountriesList;
